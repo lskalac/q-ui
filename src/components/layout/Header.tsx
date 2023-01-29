@@ -13,7 +13,7 @@ export const Header = () => {
 			/>
 			<ul className="header__nav">
 				<li>
-					<Link to={RoutePath.LANDING}>POSTS</Link>
+					<Link to={RoutePath.POSTS}>POSTS</Link>
 				</li>
 			</ul>
 		</div>
