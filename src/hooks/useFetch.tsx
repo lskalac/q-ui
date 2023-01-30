@@ -1,6 +1,9 @@
 import {MutableRefObject, useEffect, useState} from 'react';
 
-export const useFetch = <T,>(fetch: () => Promise<T>, ref: MutableRefObject<boolean>) => {
+export const useFetch = <T,>(
+	fetch: () => Promise<T>,
+	ref: MutableRefObject<boolean>
+) => {
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [data, setData] = useState<T>();
 
@@ -10,12 +13,11 @@ export const useFetch = <T,>(fetch: () => Promise<T>, ref: MutableRefObject<bool
 	};
 
 	useEffect(() => {
-		if(ref.current)
-			handleFetch();
-			
+		if (ref.current) handleFetch();
+
 		return () => {
-			ref.current = false
-		}
+			ref.current = false;
+		};
 	}, [handleFetch, ref]);
 
 	const refetch = async () => {

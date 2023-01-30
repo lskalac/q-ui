@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useRef, useState} from 'react';
+import {useMemo, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Loader} from '../../components/elements/Loader';
 import {Title} from '../../components/elements/Title';
@@ -22,9 +22,13 @@ export const Posts = () => {
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>('');
 
-	const {data: posts, isLoading} = useFetch<Post[]>(() => getPosts(), isComponentMounted);
-	const {data: users, isLoading: isUsersLoading} = useFetch<User[]>(() =>
-		getUsers(), isComponentMounted
+	const {data: posts, isLoading} = useFetch<Post[]>(
+		() => getPosts(),
+		isComponentMounted
+	);
+	const {data: users, isLoading: isUsersLoading} = useFetch<User[]>(
+		() => getUsers(),
+		isComponentMounted
 	);
 
 	const mapData = (): PostBase[] => {
