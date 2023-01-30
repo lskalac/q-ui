@@ -70,9 +70,8 @@ html {
 
 .table {
 	overflow: hidden;
-    overflow-y: scroll;
-    height: 500px;
-
+	overflow-y: scroll;
+	height: 500px;
 
 	table {
 		width: 100%;
@@ -86,16 +85,17 @@ html {
 		color: $green;
 		background-color: $text-color;
 	}
-	  
+
 	tbody {
 		color: $grey;
 	}
 
-	th, td {
+	th,
+	td {
 		padding: 20px;
 		border-bottom: 1px solid grey;
 	}
-	  
+
 	tr:last-child > td {
 		border-bottom: none;
 	}
@@ -108,7 +108,7 @@ html {
 	align-items: center;
 	justify-content: center;
 
-	&__spinner{
+	&__spinner {
 		width: 80px;
 		height: 80px;
 		border: 5px solid $green;
@@ -127,7 +127,7 @@ html {
 	100% {
 		transform: rotate(360deg);
 	}
-} 
+}
 
 .input {
 	height: 40px;
@@ -151,7 +151,7 @@ html {
 	&__signature {
 		margin-top: 24px;
 		font-weight: 100;
-		color: $grey
+		color: $grey;
 	}
 }
 
