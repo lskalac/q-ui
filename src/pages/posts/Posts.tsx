@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { Loader } from "../../components/elements/Loader";
 import { Title } from "../../components/elements/Title"
 import { RightArrowSVG } from "../../icons";
+import { RoutePath } from "../../routes";
 import { getPosts } from "../../services/post.api";
 import { Post } from "../../types/post.types"
+import { replacePatternWithValue } from "../../util/string";
 
 export const Posts = () => {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState<boolean>(true);
     const [posts, setPosts] = useState<Post[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
 
     const fetch = async () => {
+        setLoading(true);
         setPosts(await getPosts(searchTerm));
         setLoading(false);
     }
@@ -42,7 +47,7 @@ export const Posts = () => {
                     {posts.map((x, i) => <tr key={i}>
                         <td>{x.id}</td>
                         <td>{x.title}</td>
-                        <td>
+                        <td className="cursor-pointer" onClick={() => navigate(replacePatternWithValue(RoutePath.POST_PREVIEW, ':id', x.id))}>
                             <RightArrowSVG/>
                         </td>
                     </tr>)}
