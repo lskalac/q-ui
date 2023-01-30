@@ -61,6 +61,13 @@ html {
 	margin-bottom: 24px;
 }
 
+.title_wrapper {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
 .table {
 	overflow: hidden;
     overflow-y: scroll;
@@ -121,3 +128,12 @@ html {
 		transform: rotate(360deg);
 	}
 } 
+
+.input {
+	height: 40px;
+	width: 200px;
+	border-radius: 4px;
+	outline: none;
+	padding-left: 10px;
+	padding-right: 10px;
+}

@@ -8,21 +8,29 @@ import { Post } from "../../types/post.types"
 export const Posts = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [posts, setPosts] = useState<Post[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>('');
 
     const fetch = async () => {
-        setPosts(await getPosts());
+        setPosts(await getPosts(searchTerm));
         setLoading(false);
     }
 
     useEffect(() => {
         fetch();
-    }, [])
+    }, [searchTerm])
 
     if(loading)
-        return <Loader />
+        return <Loader />;
+
+    const onSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    }
 
     return <div>
-        <Title text="Posts" />
+        <div className="title_wrapper">
+            <Title text="Posts" />
+            <input placeholder="Search by..." value={searchTerm} onChange={onSearchTermChange} className='input' />
+        </div>
         <div className="table">
             <table>
                 <thead>
