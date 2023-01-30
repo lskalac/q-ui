@@ -1,9 +1,11 @@
 import {FC, PropsWithChildren} from 'react';
 import {Page} from './components/layout/Page';
 import {HomePage} from './pages/home/HomePage';
+import { Posts } from './pages/posts/Posts';
 
 export enum RoutePath {
 	LANDING = '/',
+	POSTS = '/posts'
 }
 
 interface RouteItem {
@@ -18,6 +20,11 @@ export const routes: RouteItem[] = [
 		Component: HomePage,
 		Layout: Page,
 	},
+	{
+		path: RoutePath.POSTS,
+		Component: Posts,
+		Layout: Page
+	}
 ];
 
 export const LayoutWrapper: FC<RouteItem> = ({Component, Layout}) => {
