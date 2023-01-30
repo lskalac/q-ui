@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useMemo, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Loader} from '../../components/elements/Loader';
 import {Title} from '../../components/elements/Title';
@@ -6,27 +6,57 @@ import {useFetch} from '../../hooks/useFetch';
 import {RightArrowSVG} from '../../icons';
 import {RoutePath} from '../../routes';
 import {getPosts} from '../../services/post.api';
+import {getUsers} from '../../services/user.api';
 import {Post} from '../../types/post.types';
+import {User} from '../../types/user.types';
 import {replacePatternWithValue} from '../../util/string';
 
+interface PostBase {
+	id: number;
+	title: string;
+	userFullName: string;
+}
+
 export const Posts = () => {
+	const isComponentMounted = useRef(true);
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>('');
-	const {
-		data: posts,
-		isLoading,
-		refetch,
-	} = useFetch<Post[]>(() => getPosts(searchTerm));
 
-	useEffect(() => {
-		refetch();
-	}, [searchTerm]);
+	const {data: posts, isLoading} = useFetch<Post[]>(() => getPosts(), isComponentMounted);
+	const {data: users, isLoading: isUsersLoading} = useFetch<User[]>(() =>
+		getUsers(), isComponentMounted
+	);
 
-	if (isLoading) return <Loader />;
+	const mapData = (): PostBase[] => {
+		if (!posts || !users) return [];
+
+		return posts
+			.map((x) => {
+				return {
+					id: x.id,
+					title: x.title,
+					userFullName:
+						users.find((u) => u.id === x.userId)?.name || '',
+				} as PostBase;
+			})
+			.filter(
+				(x) =>
+					!searchTerm ||
+					x.userFullName
+						.toLowerCase()
+						.includes(searchTerm.toLowerCase())
+			);
+	};
+
+	const listData = useMemo(() => {
+		return mapData();
+	}, [posts, searchTerm]);
 
 	const onSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(event.target.value);
 	};
+
+	if (isLoading || isUsersLoading) return <Loader />;
 
 	return (
 		<div>
@@ -42,12 +72,14 @@ export const Posts = () => {
 			<div className="table">
 				<table>
 					<thead>
-						<th>PostID</th>
-						<th>Title</th>
-						<th>Actions</th>
+						<tr>
+							<th>PostID</th>
+							<th>Title</th>
+							<th>Actions</th>
+						</tr>
 					</thead>
 					<tbody>
-						{(posts || []).map((x, i) => (
+						{listData.map((x, i) => (
 							<tr key={i}>
 								<td>{x.id}</td>
 								<td>{x.title}</td>
@@ -66,8 +98,10 @@ export const Posts = () => {
 								</td>
 							</tr>
 						))}
-						{(posts || []).length === 0 && (
-							<tr aria-colspan={3}>No data found.</tr>
+						{listData.length === 0 && (
+							<tr aria-colspan={3}>
+								<td>No data found.</td>
+							</tr>
 						)}
 					</tbody>
 				</table>
