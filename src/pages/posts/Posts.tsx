@@ -7,17 +7,12 @@ import {RightArrowSVG} from '../../icons';
 import {RoutePath} from '../../routes';
 import {getPosts} from '../../services/post.api';
 import {getUsers} from '../../services/user.api';
-import {Post} from '../../types/post.types';
+import {Post, PostBase} from '../../types/post.types';
 import {User} from '../../types/user.types';
 import {replacePatternWithValue} from '../../util/string';
 
-interface PostBase {
-	id: number;
-	title: string;
-	userFullName: string;
-}
-
 export const Posts = () => {
+	console.log('posts')
 	const isComponentMounted = useRef(true);
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>('');
@@ -54,7 +49,7 @@ export const Posts = () => {
 
 	const listData = useMemo(() => {
 		return mapData();
-	}, [posts, searchTerm]);
+	}, [posts, searchTerm, mapData]);
 
 	const onSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(event.target.value);

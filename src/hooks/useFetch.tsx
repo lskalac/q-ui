@@ -1,4 +1,4 @@
-import {MutableRefObject, useEffect, useState} from 'react';
+import {MutableRefObject, useCallback, useEffect, useState} from 'react';
 
 export const useFetch = <T,>(
 	fetch: () => Promise<T>,
@@ -7,10 +7,10 @@ export const useFetch = <T,>(
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [data, setData] = useState<T>();
 
-	const handleFetch = async () => {
+	const handleFetch = useCallback(async () => {
 		setData(await fetch());
 		setIsLoading(false);
-	};
+	}, [fetch]);
 
 	useEffect(() => {
 		if (ref.current) handleFetch();
