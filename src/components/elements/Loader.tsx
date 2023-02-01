@@ -1,8 +1,8 @@
-import { withComponentInfoLog } from "../withComponentInfoLog";
+import {withComponentInfoLog} from '../withComponentInfoLog';
 
 export const Loader = () => {
 	return (
-		<div className="loader">
+		<div data-testid="loader" className="loader">
 			<span className="loader__spinner"></span>
 		</div>
 	);

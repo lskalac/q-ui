@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import { withComponentInfoLog } from '../withComponentInfoLog';
+import {withComponentInfoLog} from '../withComponentInfoLog';
 
 interface TitleProps {
 	text: string;

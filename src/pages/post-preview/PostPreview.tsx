@@ -7,10 +7,10 @@ import {getUser} from '../../services/user.api';
 import {Post, PostComment} from '../../types/post.types';
 import {User} from '../../types/user.types';
 import Title from '../../components/elements/Title';
-import { withComponentInfoLog } from '../../components/withComponentInfoLog';
+import {withComponentInfoLog} from '../../components/withComponentInfoLog';
 
 export const PostPreview = () => {
-	console.log('post')
+	console.log('post');
 	const {id} = useParams<{id: string}>();
 	const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
 	const [user, setUser] = useState<User>();

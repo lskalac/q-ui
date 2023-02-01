@@ -1,5 +1,5 @@
 import Title from '../components/elements/Title';
-import { withComponentInfoLog } from '../components/withComponentInfoLog';
+import {withComponentInfoLog} from '../components/withComponentInfoLog';
 
 export const NotFound = () => {
 	return (

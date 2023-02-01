@@ -1,11 +1,11 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../routes';
-import { withComponentInfoLog } from '../withComponentInfoLog';
+import {withComponentInfoLog} from '../withComponentInfoLog';
 
 export const Header = () => {
 	const navigate = useNavigate();
 	return (
-		<div className="header">
+		<div data-testid="header" className="header">
 			<img
 				className="header__logo"
 				src="/img-logo.svg"

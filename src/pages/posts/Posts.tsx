@@ -2,7 +2,7 @@ import {useMemo, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Loader from '../../components/elements/Loader';
 import Title from '../../components/elements/Title';
-import { withComponentInfoLog } from '../../components/withComponentInfoLog';
+import {withComponentInfoLog} from '../../components/withComponentInfoLog';
 import {useFetch} from '../../hooks/useFetch';
 import {RightArrowSVG} from '../../icons';
 import {RoutePath} from '../../routes';
@@ -13,7 +13,7 @@ import {User} from '../../types/user.types';
 import {replacePatternWithValue} from '../../util/string';
 
 export const Posts = () => {
-	console.log('posts')
+	console.log('posts');
 	const isComponentMounted = useRef(true);
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>('');
