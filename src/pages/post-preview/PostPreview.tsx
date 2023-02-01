@@ -1,15 +1,15 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {Loader} from '../../components/elements/Loader';
-import {Title} from '../../components/elements/Title';
 import {useFetch} from '../../hooks/useFetch';
 import {getPost, getPostComments} from '../../services/post.api';
 import {getUser} from '../../services/user.api';
 import {Post, PostComment} from '../../types/post.types';
 import {User} from '../../types/user.types';
+import Title from '../../components/elements/Title';
 
 export const PostPreview = () => {
-	console.log('post')
+	console.log('post');
 	const {id} = useParams<{id: string}>();
 	const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
 	const [user, setUser] = useState<User>();

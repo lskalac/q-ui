@@ -12,7 +12,7 @@ import {User} from '../../types/user.types';
 import {replacePatternWithValue} from '../../util/string';
 
 export const Posts = () => {
-	console.log('posts')
+	console.log('posts');
 	const isComponentMounted = useRef(true);
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>('');
