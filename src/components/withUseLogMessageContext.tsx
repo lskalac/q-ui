@@ -1,15 +1,16 @@
 import {useContext} from 'react';
 import {LogMessageContext} from '../context/LogMessageContext';
 
-interface withUseLogMessageContextProps {
+
+export interface withUseLogMessageContextProps {
 	logMessage: string;
 }
+export type Props<T extends unknown> = T & withUseLogMessageContextProps;
+type ComponentType = <T extends unknown>(props: Props<T>) => JSX.Element;
 
 export const withUseLogMessageContext =
 	(
-		Component: <T extends withUseLogMessageContextProps>(
-			props: T
-		) => JSX.Element
+		Component: ComponentType
 	) =>
 	(props: any) => {
 		return (

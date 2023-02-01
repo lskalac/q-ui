@@ -1,3 +1,5 @@
+import { withComponentInfoLog } from "../withComponentInfoLog";
+
 export const Loader = () => {
 	return (
 		<div className="loader">
@@ -5,3 +7,5 @@ export const Loader = () => {
 		</div>
 	);
 };
+
+export default withComponentInfoLog(Loader);

@@ -1,8 +1,8 @@
 import {FC, PropsWithChildren} from 'react';
-import {Page} from './components/layout/Page';
-import {HomePage} from './pages/home/HomePage';
-import {PostPreview} from './pages/post-preview/PostPreview';
-import {Posts} from './pages/posts/Posts';
+import Page from './components/layout/Page';
+import HomePage from './pages/home/HomePage';
+import PostPreview from './pages/post-preview/PostPreview';
+import Posts from './pages/posts/Posts';
 
 export enum RoutePath {
 	LANDING = '/',

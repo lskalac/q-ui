@@ -1,6 +1,7 @@
 import {FC, PropsWithChildren} from 'react';
-import {Footer} from './Footer';
-import {Header} from './Header';
+import { withComponentInfoLog } from '../withComponentInfoLog';
+import Footer from './Footer';
+import Header from './Header';
 
 export const Page: FC<PropsWithChildren> = ({children}) => {
 	return (
@@ -11,3 +12,5 @@ export const Page: FC<PropsWithChildren> = ({children}) => {
 		</div>
 	);
 };
+
+export default withComponentInfoLog(Page);

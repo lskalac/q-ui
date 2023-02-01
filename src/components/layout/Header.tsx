@@ -1,5 +1,6 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {RoutePath} from '../../routes';
+import { withComponentInfoLog } from '../withComponentInfoLog';
 
 export const Header = () => {
 	const navigate = useNavigate();
@@ -19,3 +20,5 @@ export const Header = () => {
 		</div>
 	);
 };
+
+export default withComponentInfoLog(Header);
