@@ -9,20 +9,22 @@ describe('Page', () => {
 			Link: () => {},
 		}));
 
-		render(<Page>
-            <p>Child component</p>
-        </Page>);
+		render(
+			<Page>
+				<p>Child component</p>
+			</Page>
+		);
 	});
 
-    it('should render header', () => {
+	it('should render header', () => {
 		expect(screen.getByTestId('header')).toBeDefined();
-    })
+	});
 
-    it('should render children', () => {
-        expect(screen.getByText('Child component')).toBeDefined();
-    })
+	it('should render children', () => {
+		expect(screen.getByText('Child component')).toBeDefined();
+	});
 
-    it('should render footer', () => {
+	it('should render footer', () => {
 		expect(screen.getByTestId('footer')).toBeDefined();
-    })
+	});
 });

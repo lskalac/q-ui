@@ -10,7 +10,6 @@ import Title from '../../components/elements/Title';
 import {withComponentInfoLog} from '../../components/withComponentInfoLog';
 
 export const PostPreview = () => {
-	console.log('post');
 	const {id} = useParams<{id: string}>();
 	const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
 	const [user, setUser] = useState<User>();

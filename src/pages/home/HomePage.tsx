@@ -3,7 +3,7 @@ import {withComponentInfoLog} from '../../components/withComponentInfoLog';
 
 export const HomePage = () => {
 	return (
-		<div>
+		<div data-testid="home-page">
 			<Title text="Home Page" />
 			<p>Welcome to extra super Posts website!!!</p>
 		</div>
