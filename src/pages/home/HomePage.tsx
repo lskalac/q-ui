@@ -1,4 +1,5 @@
-import {Title} from '../../components/elements/Title';
+import Title from '../../components/elements/Title';
+import { withComponentInfoLog } from '../../components/withComponentInfoLog';
 
 export const HomePage = () => {
 	return (
@@ -8,3 +9,5 @@ export const HomePage = () => {
 		</div>
 	);
 };
+
+export default withComponentInfoLog(HomePage);

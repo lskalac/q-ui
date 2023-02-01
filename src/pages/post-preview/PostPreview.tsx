@@ -1,33 +1,40 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {Loader} from '../../components/elements/Loader';
-import {Title} from '../../components/elements/Title';
+import Loader from '../../components/elements/Loader';
+import {useFetch} from '../../hooks/useFetch';
 import {getPost, getPostComments} from '../../services/post.api';
 import {getUser} from '../../services/user.api';
 import {Post, PostComment} from '../../types/post.types';
 import {User} from '../../types/user.types';
+import Title from '../../components/elements/Title';
+import { withComponentInfoLog } from '../../components/withComponentInfoLog';
 
 export const PostPreview = () => {
+	console.log('post')
 	const {id} = useParams<{id: string}>();
-	const [loading, setLoading] = useState<boolean>(true);
-	const [post, setPost] = useState<Post>();
-	const [postComments, setPostComments] = useState<PostComment[]>();
+	const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
 	const [user, setUser] = useState<User>();
+	const isComponentMounted = useRef(true);
+	const {data: post, isLoading: isPostLoading} = useFetch<Post>(
+		() => getPost(Number(id)),
+		isComponentMounted
+	);
+	const {data: postComments, isLoading: isPostCommentsLoading} = useFetch<
+		PostComment[]
+	>(() => getPostComments(Number(id)), isComponentMounted);
 
-	const fetch = async () => {
-		setLoading(true);
-		const postRes = await getPost(Number(id));
-		setPost(postRes);
-		setPostComments(await getPostComments(Number(id)));
-		setUser(await getUser(Number(postRes?.userId)));
-		setLoading(false);
-	};
+	const fetchUser = useCallback(async () => {
+		setIsUserLoading(true);
+		setUser(await getUser(Number(post?.userId)));
+		setIsUserLoading(false);
+	}, [post?.userId]);
 
 	useEffect(() => {
-		fetch();
-	}, []);
+		if (post) fetchUser();
+	}, [post, fetchUser]);
 
-	if (loading) return <Loader />;
+	if (isPostLoading || isPostCommentsLoading || isUserLoading)
+		return <Loader />;
 
 	return (
 		<div>
@@ -53,3 +60,5 @@ export const PostPreview = () => {
 		</div>
 	);
 };
+
+export default withComponentInfoLog(PostPreview);

@@ -12,3 +12,9 @@ export interface PostComment {
 	email: string;
 	body: string;
 }
+
+export interface PostBase {
+	id: number;
+	title: string;
+	userFullName: string;
+}

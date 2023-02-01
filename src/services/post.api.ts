@@ -3,7 +3,7 @@ import {baseApi} from './base.api';
 
 const BASE_URL = 'posts';
 
-export const getPosts = async (userId: string): Promise<Post[]> => {
+export const getPosts = async (userId?: string): Promise<Post[]> => {
 	const params = userId
 		? {
 				userId,
