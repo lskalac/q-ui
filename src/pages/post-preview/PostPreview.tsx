@@ -9,7 +9,7 @@ import {User} from '../../types/user.types';
 import Title from '../../components/elements/Title';
 import {withComponentInfoLog} from '../../components/withComponentInfoLog';
 import {PostDetail} from './components/PostDetail';
-import { CommentList } from './components/CommentList';
+import {CommentList} from './components/CommentList';
 
 export const PostPreview = () => {
 	const {id} = useParams<{id: string}>();
