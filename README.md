@@ -12,6 +12,7 @@
     VITE_API_URL=https://jsonplaceholder.typicode.com
     ```
 -   execute `yarn dev` command
+-   to start tests, execute `yarn test` command
 
 ## Where to find my api?
 
