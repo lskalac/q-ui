@@ -1,8 +1,9 @@
 import {useMemo, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Loader from '../../components/elements/Loader';
+import Table, {TableAction, TableColumn} from '../../components/elements/Table';
 import Title from '../../components/elements/Title';
-import { withComponentInfoLog } from '../../components/withComponentInfoLog';
+import {withComponentInfoLog} from '../../components/withComponentInfoLog';
 import {useFetch} from '../../hooks/useFetch';
 import {RightArrowSVG} from '../../icons';
 import {RoutePath} from '../../routes';
@@ -13,7 +14,7 @@ import {User} from '../../types/user.types';
 import {replacePatternWithValue} from '../../util/string';
 
 export const Posts = () => {
-	console.log('posts')
+	console.log('posts');
 	const isComponentMounted = useRef(true);
 	const navigate = useNavigate();
 	const [searchTerm, setSearchTerm] = useState<string>('');
@@ -58,6 +59,37 @@ export const Posts = () => {
 
 	if (isLoading || isUsersLoading) return <Loader />;
 
+	const columns: TableColumn<Post>[] = [
+		{
+			key: 'id',
+			label: 'PostID',
+		},
+		{
+			key: 'title',
+			label: 'Title',
+		},
+	];
+
+	const actions: TableAction<Post>[] = [
+		{
+			Component: (props) => (
+				<div
+					className="cursor-pointer"
+					onClick={() =>
+						navigate(
+							replacePatternWithValue(
+								RoutePath.POST_PREVIEW,
+								':id',
+								props.data.id
+							)
+						)
+					}>
+					<RightArrowSVG />
+				</div>
+			),
+		},
+	];
+
 	return (
 		<div>
 			<div className="title_wrapper">
@@ -69,43 +101,7 @@ export const Posts = () => {
 					className="input"
 				/>
 			</div>
-			<div className="table">
-				<table>
-					<thead>
-						<tr>
-							<th>PostID</th>
-							<th>Title</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						{listData.map((x, i) => (
-							<tr key={i}>
-								<td>{x.id}</td>
-								<td>{x.title}</td>
-								<td
-									className="cursor-pointer"
-									onClick={() =>
-										navigate(
-											replacePatternWithValue(
-												RoutePath.POST_PREVIEW,
-												':id',
-												x.id
-											)
-										)
-									}>
-									<RightArrowSVG />
-								</td>
-							</tr>
-						))}
-						{listData.length === 0 && (
-							<tr aria-colspan={3}>
-								<td>No data found.</td>
-							</tr>
-						)}
-					</tbody>
-				</table>
-			</div>
+			<Table data={listData} columns={columns} actions={actions} />
 		</div>
 	);
 };

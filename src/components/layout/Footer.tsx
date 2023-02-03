@@ -1,7 +1,11 @@
-import { withComponentInfoLog } from "../withComponentInfoLog";
+import {withComponentInfoLog} from '../withComponentInfoLog';
 
 export const Footer = () => {
-	return <div className="footer">Lorena@2023</div>;
+	return (
+		<div data-testid="footer" className="footer">
+			Lorena@2023
+		</div>
+	);
 };
 
 export default withComponentInfoLog(Footer);

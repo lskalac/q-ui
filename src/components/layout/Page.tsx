@@ -1,5 +1,5 @@
 import {FC, PropsWithChildren} from 'react';
-import { withComponentInfoLog } from '../withComponentInfoLog';
+import {withComponentInfoLog} from '../withComponentInfoLog';
 import Footer from './Footer';
 import Header from './Header';
 

@@ -7,10 +7,11 @@ import {getUser} from '../../services/user.api';
 import {Post, PostComment} from '../../types/post.types';
 import {User} from '../../types/user.types';
 import Title from '../../components/elements/Title';
-import { withComponentInfoLog } from '../../components/withComponentInfoLog';
+import {withComponentInfoLog} from '../../components/withComponentInfoLog';
+import {PostDetail} from './components/PostDetail';
+import {CommentList} from './components/CommentList';
 
 export const PostPreview = () => {
-	console.log('post')
 	const {id} = useParams<{id: string}>();
 	const [isUserLoading, setIsUserLoading] = useState<boolean>(true);
 	const [user, setUser] = useState<User>();
@@ -39,23 +40,10 @@ export const PostPreview = () => {
 	return (
 		<div>
 			<Title text={post?.title || ''} />
-			<div className="post">
-				<p>{post?.body}</p>
-				<i className="post__signature">- {user?.username}</i>
-			</div>
+			<PostDetail author={user?.name || ''} body={post?.body || ''} />
 			<div className="comment">
 				<h3>Comments</h3>
-				{postComments?.map((x, i) => {
-					return (
-						<div key={i} className="comment__item">
-							<p className="comment__item__title">{x.name}</p>
-							<p className="comment__item__body">{x.body}</p>
-							<p className="comment__item__signature">
-								{x.email}
-							</p>
-						</div>
-					);
-				})}
+				<CommentList comments={postComments || []} />
 			</div>
 		</div>
 	);
