@@ -12,6 +12,7 @@ import {getUsers} from '../../services/user.api';
 import {Post, PostBase} from '../../types/post.types';
 import {User} from '../../types/user.types';
 import {replacePatternWithValue} from '../../util/string';
+import SearchFilter from '../../components/filters/SearchFilter';
 
 export const Posts = () => {
 	const isComponentMounted = useRef(true);
@@ -52,10 +53,6 @@ export const Posts = () => {
 		return mapData();
 	}, [posts, searchTerm, mapData]);
 
-	const onSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSearchTerm(event.target.value);
-	};
-
 	if (isLoading || isUsersLoading) return <Loader />;
 
 	const columns: TableColumn<Post>[] = [
@@ -93,12 +90,7 @@ export const Posts = () => {
 		<div>
 			<div className="title_wrapper">
 				<Title text="Posts" />
-				<input
-					placeholder="Search by..."
-					value={searchTerm}
-					onChange={onSearchTermChange}
-					className="input"
-				/>
+				<SearchFilter onChange={setSearchTerm} />
 			</div>
 			<Table data={listData} columns={columns} actions={actions} />
 		</div>
